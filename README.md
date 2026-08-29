@@ -27,7 +27,7 @@ A Persona menu-inspired portfolio, structured as Model–View–Controller.
 
 Missing images hide themselves — no broken icons.
 
-The video assets are not uploaded as they exceed 500MB. I recommand downloading them online and add them inside assets in a new video folder later on. 
+The video folder inside assets are not uploaded as they exceed 500MB. I recommand downloading them online and add them inside assets in a new video folder later on. 
 
 ## Editing content
 
