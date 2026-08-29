@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NUMAL DAS · PORTFOLIO</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-screen="home">
+
+<!-- Background art layers -->
+<div id="bg" aria-hidden="true">
+  <div class="bg-layer" id="bg-stripes"></div>
+  <svg class="bg-star" style="left:6%;top:8%;width:26vmax;height:26vmax" viewBox="0 0 100 100">
+    <polygon points="50,0 60,35 98,35 68,57 78,94 50,72 22,94 32,57 2,35 40,35" fill="#000"/>
+  </svg>
+  <svg class="bg-star s2" style="right:4%;bottom:6%;width:34vmax;height:34vmax" viewBox="0 0 100 100">
+    <polygon points="50,0 60,35 98,35 68,57 78,94 50,72 22,94 32,57 2,35 40,35" fill="#fff"/>
+  </svg>
+  <!-- Per-screen menu artwork: assets/menus/<screen>.jpg
+       Each falls back to the CSS stripes if its file is missing -->
+  <img class="menu-art" id="art-home" src="assets/menus/home.jpg" alt=""
+       onload="document.body.classList.add('has-art-home')" onerror="this.remove()">
+  <img class="menu-art" id="art-projects" src="assets/menus/projects.jpg" alt=""
+       onload="document.body.classList.add('has-art-projects')" onerror="this.remove()">
+ <video class="menu-art" id="art-skills"
+       autoplay muted loop playsinline
+       onloadeddata="document.body.classList.add('has-art-skills')">
+  <source src="assets/video/skills.mp4" type="video/mp4">
+</video>
+  <img class="menu-art" id="art-about" src="assets/menus/about.jpg" alt=""
+       onload="document.body.classList.add('has-art-about')" onerror="this.remove()">
+  <img class="menu-art" id="art-contact" src="assets/menus/contact.jpg" alt=""
+       onload="document.body.classList.add('has-art-contact')" onerror="this.remove()">
+  <div class="bg-layer" id="bg-halftone"></div>
+  <div class="bg-layer" id="bg-vignette"></div>
+</div>
+<div id="slash" aria-hidden="true"></div>
+
+<!-- Hero art: drop your file at assets/hero.png (transparent PNG looks best) -->
+<img id="hero-art" src="assets/hero.png" alt="" onerror="this.remove()">
+
+<!-- Screen transition wipe -->
+<div id="wipe" aria-hidden="true">
+  <div class="pane p3"></div>
+  <div class="pane p2"></div>
+  <div class="pane p1"></div>
+  <div class="flash"></div>
+</div>
+
+<!-- Custom animated cursor + select sound -->
+<div id="cursor" aria-hidden="true"></div>
+<audio id="sfx-select" src="assets/sfx/select.mp3" preload="auto"></audio>
+<button id="audio-toggle" aria-label="Turn audio on">🔇</button>
+
+<video id="home-video" autoplay muted loop playsinline>
+  <source src="assets/video/home-background.mp4" type="video/mp4">
+</video>
+
+
+<div id="shell">
+  <div id="hud-top">
+    <div class="hud-tag">Portfolio // NUMAL DAS</div>
+    <div class="hud-tag alt">ASSAM · ELECTRONICS AND COMMUNICATION</div>
+  </div>
+
+  <div id="stage">
+
+    <!-- HOME -->
+    <section class="screen active" id="screen-home" aria-label="Main menu">
+      <div id="intro-eyebrow">Take a look at my work</div>
+      <h1 id="big-name">
+        <span class="ransom" data-ransom="NUMAL"></span>
+        <span class="ransom" data-ransom="DAS"></span>
+      </h1>
+      <p id="tagline">
+       <p id="tagline">
+  4th-year Electronics and Communication Engineering student with a strong
+  interest in programming, electronics, embedded systems, and hardware
+  exploration. I enjoy building practical projects that combine hardware
+  and software, working with Raspberry Pi, Python, circuit simulation,
+  digital electronics, and signal visualization. I am passionate about
+  learning by experimenting, solving technical problems, and turning ideas
+  into working projects.
+</p>
+      </p>
+      <nav id="menu" aria-label="Sections">
+        <button class="menu-item sel" data-target="projects">
+          <span class="ransom" data-ransom="PROJECTS"></span><span class="cursor-mark">◀</span>
+        </button>
+        <button class="menu-item" data-target="skills">
+          <span class="ransom" data-ransom="SKILLS"></span><span class="cursor-mark">◀</span>
+        </button>
+        <button class="menu-item" data-target="about">
+          <span class="ransom" data-ransom="ABOUT"></span><span class="cursor-mark">◀</span>
+        </button>
+        <button class="menu-item" data-target="contact">
+          <span class="ransom" data-ransom="CONTACT"></span><span class="cursor-mark">◀</span>
+        </button>
+      </nav>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="screen sub" id="screen-projects" aria-label="Projects">
+      <div class="screen-head"><span class="ransom" data-ransom="PROJECTS"></span></div>
+      <button class="back-hint" data-back>ESC · Back</button>
+      <div class="grid-label"><span class="bar"></span>Featured</div>
+      <div id="feat-grid" class="grid"></div>
+      <div class="grid-label"><span class="bar"></span>All repositories</div>
+      <div id="repo-status">Contacting GitHub…</div>
+      <div id="repo-grid" class="grid"></div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="screen sub" id="screen-skills" aria-label="Skills">
+      <div class="screen-head"><span class="ransom" data-ransom="SKILLS"></span></div>
+      <button class="back-hint" data-back>ESC · Back</button>
+      <div id="skills-body"></div>
+    </section>
+
+    <!-- ABOUT -->
+<section class="screen sub align-right" id="screen-about" aria-label="About">
+
+  <div class="screen-head">
+    <span class="ransom" data-ransom="ABOUT"></span>
+  </div>
+
+  <button class="back-hint" data-back>ESC · Back</button>
+
+  <div class="paper">
+
+    <!-- Profile photo -->
+    <figure class="about-photo">
+      <img src="assets/me.jpg" alt="Numal Das">
+      <figcaption>NUMAL · ASSAM</figcaption>
+    </figure>
+
+    <!-- INTRODUCTION -->
+    <p class="quote">
+      I am a motivated
+      <strong class="about-highlight">4th-year Electronics & Communication Engineering student</strong>
+      with a strong interest in
+      <strong class="about-highlight">programming, electronics, hardware exploration,</strong>
+      and problem-solving.
+    </p>
+
+    <br>
+
+    <!-- PROFILE -->
+    <p>
+      I enjoy understanding how things work from both the
+      <strong class="about-highlight">hardware and software</strong>
+      side. My goal is not simply to learn technologies, but to
+      experiment with them, build practical projects, make mistakes,
+      understand why they happen, and improve the solution.
+    </p>
+
+    <br>
+
+    <!-- TECHNICAL INTEREST -->
+    <p>
+      My current technical interests include
+      <strong class="about-highlight">embedded systems, digital logic,
+      circuit simulation, Python, signal visualization, electronics,
+      and VLSI.</strong>
+      I particularly enjoy projects where programming interacts directly
+      with physical hardware.
+    </p>
+
+    <br>
+
+    <!-- PROJECTS -->
+    <p>
+      One of my main projects is a
+      <strong class="about-highlight">Raspberry Pi 5 based oscilloscope</strong>
+      using an ADS1115 16-bit ADC. I worked with I²C communication,
+      voltage acquisition, channel selection, and real-time waveform
+      visualization using Python and Matplotlib.
+    </p>
+
+    <br>
+
+    <p>
+      I have also worked on
+      <strong class="about-highlight">CMOS inverter analysis using LTspice</strong>,
+      where I studied the voltage transfer characteristic, switching
+      behaviour, VOH, VOL, VIH, VIL, and noise margins. I experimented
+      with PMOS and NMOS sizing to understand how transistor dimensions
+      affect inverter behaviour.
+    </p>
+
+    <br>
+
+    <p>
+      In digital design, I implemented
+      <strong class="about-highlight">Mealy and Moore finite-state
+      machines</strong>
+      for binary sequence detection using Verilog. I created testbenches
+      and used GTKWave to verify state transitions and outputs.
+    </p>
+
+    <br>
+
+    <p>
+      I have also explored
+      <strong class="about-highlight">Python image processing</strong>
+      using OpenCV and Matplotlib, including image loading, RGB/BGR
+      conversion, displaying images, rotation, translation, and scaling.
+    </p>
+
+    <br>
+
+    <!-- TOOLS -->
+    <p>
+      Some of the tools and technologies I have worked with include
+      <strong class="about-highlight">Python, C/C++, Verilog, 8051 Assembly,
+      LTspice, GTKWave, Keil uVision 5, Magic, VS Code, OpenCV,
+      NumPy, Matplotlib, Jupyter Notebook, Raspberry Pi 5,
+      and ADS1115.</strong>
+    </p>
+
+    <br>
+
+    <!-- PERSONALITY -->
+    <p>
+      I consider
+      <strong class="about-highlight">problem-solving and persistence</strong>
+      to be two of my strongest qualities. I like challenging technical
+      problems because they force me to think differently and keep
+      experimenting until I understand the solution.
+    </p>
+
+    <br>
+
+    <p>
+      I also value
+      <strong class="about-highlight">curiosity, independent learning,
+      hands-on experimentation, teamwork, adaptability,</strong>
+      and helping others whenever I can.
+    </p>
+
+    <br>
+
+    <!-- OUTSIDE ACADEMICS -->
+    <p>
+      Outside academics, I have a wide range of interests. I enjoy
+      <strong class="about-highlight">programming and hardware exploration,</strong>
+      but I also like gaming, especially challenging Souls-like and
+      story-driven games. I enjoy going to the gym, swimming, cycling,
+      running, and cooking.
+    </p>
+
+    <br>
+
+    <!-- PERSONAL QUOTE -->
+    <p class="about-quote">
+      <strong>
+        “The important thing is not to stop questioning.”
+      </strong>
+      <br>
+      — Albert Einstein
+    </p>
+
+    <br>
+
+    <!-- CURRENT GOAL -->
+    <p>
+      Right now, I am focused on strengthening my fundamentals in
+      <strong class="about-highlight">electronics, programming,
+      embedded systems, digital systems, and practical engineering.</strong>
+      I want to keep turning what I learn in class into projects that
+      I can actually build, test, and improve.
+    </p>
+
+  </div>
+
+  <!-- CV BUTTON -->
+  <a class="cv-btn"
+     href="assets/resume/Numal_Das_Resume.pdf"
+     download="Numal_Das_Resume.pdf">
+    <span>⬇ Download my CV (PDF)</span>
+  </a>
+
+</section>
+    <!-- CONTACT -->
+    <section class="screen sub align-right" id="screen-contact" aria-label="Contact">
+      <div class="screen-head"><span class="ransom" data-ransom="CONTACT"></span></div>
+      <button class="back-hint" data-back>ESC · Back</button>
+      <div class="paper" style="max-width:620px">
+        <p>I'm open to <strong>graduate ML and software engineering roles</strong> and research
+        collaborations in AI. Drop me a message below and it goes straight to my inbox,
+        or find me on any of these:</p>
+      </div>
+      <div class="contact-list">
+        <a class="contact-chip" href="mailto:numaldas500@gmail.com"><span>Email ✉</span></a>
+        
+        <a class="contact-chip" href="https://github.com/Numal400" target="_blank" rel="noopener"><span>GitHub ↗</span></a>
+        
+        <a class="contact-chip" href="https://www.instagram.com/ariel_matic_" target="_blank" rel="noopener"><span>Instagram ↗</span></a>
+        
+       <a class="contact-chip" href="assets/resume/Numal_Das_Resume.pdf" download="Numal_Das_Resume.pdf"><span>CV ⬇</span></a>
+      </div>
+
+      <!-- Message form — relayed to your inbox via formsubmit.co.
+           NOTE: the first-ever submission emails you a one-time activation link. -->
+      <form id="contact-form" class="paper" style="max-width:620px" novalidate>
+        <div class="form-head">Send me a message</div>
+        <label class="field">
+          <span>Name</span>
+          <input type="text" name="name" required maxlength="100" autocomplete="name">
+        </label>
+        <label class="field">
+          <span>Your email</span>
+          <input type="email" name="email" required maxlength="150" autocomplete="email">
+        </label>
+        <label class="field">
+          <span>Message</span>
+          <textarea name="message" required rows="5" maxlength="3000"></textarea>
+        </label>
+        <!-- honeypot: bots fill this, humans never see it -->
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off"
+               style="position:absolute;left:-5000px" aria-hidden="true">
+        <div class="form-foot">
+          <button type="submit" class="cv-btn form-send"><span>Send it ➤</span></button>
+          <div id="form-status" role="status"></div>
+        </div>
+      </form>
+    </section>
+
+  </div>
+
+  <div id="hud-bottom">
+    <span><span class="key">↑↓</span>Select</span>
+    <span><span class="key">Enter</span>Confirm</span>
+    <span><span class="key">Esc</span>Back</span>
+    <span style="margin-left:auto;opacity:.8" id="clock"></span>
+  </div>
+</div>
+
+<!-- MVC: model = data, view = DOM, controller = events -->
+<script src="js/model.js" defer></script>
+<script src="js/view.js" defer></script>
+<script src="js/controller.js" defer></script>
+</body>
+</html>
